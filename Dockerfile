@@ -9,14 +9,14 @@ WORKDIR /go/whoami
 # Download go modules
 COPY go.mod .
 COPY go.sum .
-RUN GO111MODULE=on GOPROXY=https://proxy.golang.org go mod download
+RUN GO111MODULE=on GOPROXY=https://goproxy.cn go mod download
 
 COPY . .
 
 RUN make build
 
 # Create a minimal container to run a Golang static binary
-FROM scratch
+FROM busybox:1.28.3
 
 COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
