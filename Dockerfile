@@ -22,5 +22,6 @@ COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /go/whoami/whoami .
 
-ENTRYPOINT ["/whoami"]
+# ENTRYPOINT ["/whoami"]
+CMD ["/whoami"]
 EXPOSE 80
